@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Warning</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:black;
+      color:red;
+      overflow:hidden;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      text-align:center;
+    }
+
+    /* AUTHOR TOP BAR */
+    .author{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      padding:8px;
+      text-align:center;
+      background:black;
+      color:lime;
+      font-size:15px;
+      letter-spacing:4px;
+      font-weight:bold;
+      text-shadow:0 0 12px lime;
+      border-bottom:1px solid lime;
+      box-shadow:0 0 15px lime;
+      animation:blink 1s infinite;
+      z-index:9999;
+    }
+
+    .warning-box{
+      width:90%;
+      max-width:800px;
+      border:3px solid red;
+      padding:30px;
+      background:rgba(20,0,0,0.85);
+      box-shadow:0 0 35px red;
+      animation:flicker 0.15s infinite alternate;
+    }
+
+    h1{
+      font-size:42px;
+      margin-bottom:20px;
+      text-shadow:0 0 12px red;
+    }
+
+    p{
+      font-size:20px;
+      margin:12px 0;
+    }
+
+    .blink{
+      animation:blink 1s infinite;
+    }
+
+    .loading{
+      width:100%;
+      height:28px;
+      border:2px solid red;
+      margin-top:25px;
+      overflow:hidden;
+    }
+
+    .bar{
+      width:0%;
+      height:100%;
+      background:red;
+      animation:load 14s linear forwards;
+    }
+
+    .logs{
+      margin-top:20px;
+      height:180px;
+      overflow:hidden;
+      text-align:left;
+      font-size:15px;
+      color:#ff6666;
+      border-top:1px solid red;
+      padding-top:12px;
+    }
+
+    .final{
+      display:none;
+      margin-top:30px;
+      font-size:34px;
+      color:lime;
+      text-shadow:0 0 15px lime;
+      animation:blink 0.8s infinite;
+    }
+
+    .small{
+      margin-top:20px;
+      font-size:13px;
+      color:gray;
+    }
+
+    @keyframes blink{
+      50%{
+        opacity:0;
+      }
+    }
+
+    @keyframes flicker{
+      from{
+        box-shadow:0 0 10px red;
+      }
+      to{
+        box-shadow:0 0 40px red;
+      }
+    }
+
+    @keyframes load{
+      from{
+        width:0%;
+      }
+      to{
+        width:100%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP AUTHOR -->
+  <div class="author">
+    AUTHOR.YSZ WARNING SCREEN
+  </div>
+
+  <!-- MAIN WARNING -->
+  <div class="warning-box">
+
+    <h1 class="blink">⚠ SECURITY BREACH DETECTED ⚠</h1>
+
+    <p>Suspicious activity has been detected...</p>
+    <p>Connecting to external device...</p>
+    <p>Camera access granted...</p>
+
+    <div class="loading">
+      <div class="bar"></div>
+    </div>
+
+    <div class="logs" id="logs"></div>
+
+    <div class="final" id="final">
+      SUCCESSFULL
+    </div>
+
+    <div class="small">
+      Security Simulation Interface v3.1
+    </div>
+
+  </div>
+
+  <!-- WARNING SOUND -->
+  <audio id="alarm" autoplay loop>
+    <source src="https://www.soundjay.com/misc/sounds/fail-buzzer-02.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- HACKER KEYBOARD SOUND -->
+  <audio id="typing" autoplay loop>
+    <source src="https://www.soundjay.com/mechanical/keyboard-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+
+    const logs = [
+      "[SYSTEM] Accessing device directories...",
+      "[WARNING] Unknown activity detected...",
+      "[SYSTEM] Copying gallery data...",
+      "[SYSTEM] Copying IP address...",
+      "[SYSTEM] Copying contact database...",
+      "[CAMERA] Connecting to front camera...",
+      "[ACCESS GRANTED] Camera connected...",
+      "[UPLOAD] Sending files to remote server...",
+      "[SUCCESS] Transfer completed..."
+    ];
+
+    let i = 0;
+    const logBox = document.getElementById("logs");
+
+    const interval = setInterval(() => {
+
+      if(i < logs.length){
+        logBox.innerHTML += logs[i] + "<br>";
+        i++;
+      }else{
+        clearInterval(interval);
+      }
+
+    }, 1500);
+
+    // SHOW PRANK MESSAGE
+    setTimeout(() => {
+      document.getElementById("final").style.display = "block";
+    }, 14500);
+
+    // PHONE VIBRATION
+    function vibratePhone(){
+
+      if(navigator.vibrate){
+        navigator.vibrate([300,100,300,100,500]);
+      }
+
+    }
+
+    setInterval(vibratePhone,2500);
+
+    // FULLSCREEN + FORCE AUDIO
+    document.body.addEventListener("click", () => {
+
+      document.documentElement.requestFullscreen();
+
+      document.getElementById("alarm").play();
+      document.getElementById("typing").play();
+
+    });
+
+  </script>
+
+</body>
+</html>
